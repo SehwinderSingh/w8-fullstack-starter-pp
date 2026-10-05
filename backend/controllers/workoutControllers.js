@@ -45,7 +45,19 @@ const getWorkoutById = async (req, res) => {
 
 // PUT /api/workouts/:workoutId
 const updateWorkout = async (req, res) => {
-  res.send("updateWorkout");
+  try {
+    const workout = await Workout.findOneAndUpdate(
+      { _id: req.params.workoutId },
+      { ...req.body },
+      { returnDocument: "after", runValidators: true }
+    );
+    if (!workout) {
+      res.status(404).json({ message: "Workout not found" })
+    }
+    res.status(200).json(workout)
+  } catch (error) {
+    res.status(400).json({ message: error.message })
+  }
 };
 
 // DELETE /api/workouts/:workoutId

@@ -31,7 +31,7 @@ const AddWorkoutPage = () => {
         body: JSON.stringify(newWorkout),
       });
       if (!response.ok) {
-        const data = await res.json();
+        const data = await response.json();
         throw new Error(data.message || "Failed to create workout");
       }
       navigate("/");

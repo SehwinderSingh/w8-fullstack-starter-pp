@@ -46,6 +46,10 @@ const WorkoutPage = () => {
     }
   };
 
+  const handleEdit = async () => {
+    navigate(`/edit-workout/${workout._id}`)
+  }
+
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p className="error">{error}</p>;
   if (!workout) return <p>Workout not found</p>;
@@ -58,6 +62,7 @@ const WorkoutPage = () => {
       <p>Price: ${workout.price}</p>
 
       <button onClick={handleDelete}>Delete</button>
+      <button onClick={handleEdit}>Edit</button>
     </div>
   );
 };
